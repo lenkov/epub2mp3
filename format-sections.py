@@ -24,10 +24,14 @@ f.close()
 
 # read the source text file, process sections and write to output file.
 in_file = io.open(in_file, mode = "r", encoding="utf-8")
-out_file = open(out_fn_prefix, "w")
+out_file = open(out_fn_prefix + out_fn_suffix, "w")
 for line in in_file:
 	# convert unicode quotes to ascii and remove trailing spaces/new lines.
 	line = unidecode(line).rstrip()
+
+	# skip empty lines
+	if len(line) == 0:
+		continue
 		
 	# add section prefix/suffix if this line is a section header
 	if line in sections:
@@ -47,7 +51,6 @@ for line in in_file:
 
 	# convert quotes to \" etc.
 	line = line.replace('"','\\"')
-
 
 	# make a new file if we go above the GCP limit
 	if out_file.tell() + len(line) > max_file_size:
