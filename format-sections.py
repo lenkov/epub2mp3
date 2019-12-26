@@ -3,9 +3,9 @@
 from unidecode import unidecode
 import io
 
-section_file 	= "sections.txt"
-in_file 		= "Elegant-Puzzle3.txt"
-out_fn_prefix 	= "Elegant-Puzzle-"
+section_file 	= "Elegant-Puzzle/sections.txt"
+in_file 		= "Elegant-Puzzle/Elegant-Puzzle3.txt"
+out_fn_prefix 	= "Elegant-Puzzle/txt/Elegant-Puzzle-"
 out_fn_suffix 	= ".txt"
 out_fn_part 	= 0
 prefix 		  	= " Section "
