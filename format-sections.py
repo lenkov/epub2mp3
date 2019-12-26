@@ -3,7 +3,6 @@
 from unidecode import unidecode
 import io
 
-
 section_file 	= "sections.txt"
 in_file 		= "Elegant-Puzzle3.txt"
 out_fn_prefix 	= "Elegant-Puzzle-"
@@ -12,9 +11,8 @@ out_fn_part 	= 0
 prefix 		  	= " Section "
 suffix 			= "."
 chapter_prefix  = "Chapter "
+long_pause		= "...   "
 max_file_size 	= 5000			# limitation of GCP TTS API
-
-
 sections 		= []
 
 # get the list of sections and add them to the array
@@ -31,12 +29,12 @@ for line in in_file:
 	# convert unicode quotes to ascii and remove trailing spaces/new lines.
 	line = unidecode(line).rstrip()
 		
-	# check if this line exist in sections[]?
+	# add section prefix/suffix if this line is a section header
 	if line in sections:
 		line = line.replace(" ", ". ", 1)					# replace the first space with space and dot
 		line = prefix + line + suffix						# add prefix and suffix for sections.	
 	
-	# check if new chapter and open a new file
+	# open a new file on new chapter
 	if line.startswith(chapter_prefix):
 		out_file.close()
 		out_fn_part = 0
@@ -44,9 +42,8 @@ for line in in_file:
 		out_fn = out_fn_prefix + chapter_as_fn + "_" + str(out_fn_part) + out_fn_suffix
 		out_file = open(out_fn, "w")
 
-	# add dot at the end if not there.
-	line = line + "."
-	line = line.replace ("..", ".")
+	# remove last dot (if exist) and add long pause
+	line = line.rstrip(".") + long_pause
 
 	# convert quotes to \" etc.
 	line = line.replace('"','\\"')
