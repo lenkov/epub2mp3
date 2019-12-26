@@ -1,0 +1,15 @@
+{
+  "input": {
+    "text": ""
+    },
+  "voice": {
+    "languageCode": "en-US",
+    "name": "en-US-Wavenet-D"
+  },
+  "audioConfig": {
+    "audioEncoding": "MP3",
+    "pitch": 0,
+    "speakingRate": 1
+  }
+}
+
