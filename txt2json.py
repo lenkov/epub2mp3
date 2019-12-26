@@ -4,25 +4,32 @@ import fnmatch
 import os 
 from string import Template
 
-src_folder      = "Elegant-Puzzle/txt/"
-dest_folder     = "Elegant-Puzzle/json/"
-template        = "payload.json"
+txt_folder      = "Elegant-Puzzle/txt/"
+json_folder     = "Elegant-Puzzle/json/"
+mp3_folder      = "Elegant-Puzzle/mp3/"
+json_template   = "payload.json"
+exec_template   = "curl --request POST 'https://texttospeech.googleapis.com/v1beta1/text:synthesize?key=KKKK' --header 'Accept: application/json' --header 'Content-Type: application/json' -d '@$src_file' | jq .audioContent | sed 's/\"//g' | base64 -D > $dest_file"
 file_pattern    = "*.txt"
 
-files = os.listdir(src_folder) 
+files = os.listdir(txt_folder) 
 matched_files = fnmatch.filter(files, file_pattern)
 
 if len(matched_files) == 0: 
     quit()
 
-with open(template, "r") as f:
-        template = f.read()
-tmpl = Template(template)        
+with open(json_template, "r") as f:
+        json_content = f.read()
+json_tmpl = Template(json_content)  
+exec_tmpl = Template(exec_template)      
 
 for file in matched_files:
-    with open(src_folder + file, "r") as f:
+    with open(txt_folder + file, "r") as f:
         t = f.read()
-    out_fn =   file.replace(".txt", ".json", 1) 
-    with open(dest_folder + out_fn, "w") as f:
-        t = f.write(tmpl.substitute(text = t))
+    json_fn = file.replace(".txt", ".json", 1)
+    mp3_fn  = file.replace(".txt", ".mp3", 1)
+    with open(json_folder + json_fn, "w") as f:
+        t = f.write(json_tmpl.substitute(text = t))
+    print exec_tmpl.substitute(src_file = json_folder + json_fn, dest_file = mp3_folder + mp3_fn)  
+
+
 

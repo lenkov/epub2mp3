@@ -1,6 +1,6 @@
 {
   "input": {
-    "text": ""
+    "text": "$text"
     },
   "voice": {
     "languageCode": "en-US",
