@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Lenkov's ignores:
+.DS_Store
+Elegant-Puzzle/
+commands.txt
+
