@@ -3,10 +3,12 @@
 import fnmatch 
 import os 
 from string import Template
+import sys
 
-txt_folder      = "Elegant-Puzzle/txt/"
-json_folder     = "Elegant-Puzzle/json/"
-mp3_folder      = "Elegant-Puzzle/mp3/"
+folder          = sys.argv[1] + "/"
+txt_folder      = folder + "txt/"
+json_folder     = folder + "json/"
+mp3_folder      = folder + "mp3/"
 json_template   = "payload.json"
 exec_template   = "curl --request POST 'https://texttospeech.googleapis.com/v1beta1/text:synthesize?key=KKKK' --header 'Accept: application/json' --header 'Content-Type: application/json' -d '@$src_file' | jq .audioContent | sed 's/\"//g' | base64 -D > $dest_file"
 file_pattern    = "*.txt"

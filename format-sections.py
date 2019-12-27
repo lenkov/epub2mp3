@@ -2,11 +2,14 @@
 
 from unidecode import unidecode
 import io
+import sys
 
-section_file 	= "Elegant-Puzzle/sections.txt"
-in_file 		= "Elegant-Puzzle/Elegant-Puzzle3.txt"
-out_fn_prefix 	= "Elegant-Puzzle/txt/Elegant-Puzzle-"
+folder 			= sys.argv[1] + "/"
+section_file 	= folder + "sections.txt"
+in_file 		= folder + "source.txt"
+out_fn_prefix 	= folder + "txt/"
 out_fn_suffix 	= ".txt"
+out_fn_intro 	= "Preface"
 out_fn_part 	= 0
 prefix 		  	= " Section "
 suffix 			= "."
@@ -24,7 +27,7 @@ f.close()
 
 # read the source text file, process sections and write to output file.
 in_file = io.open(in_file, mode = "r", encoding="utf-8")
-out_file = open(out_fn_prefix + out_fn_suffix, "w")
+out_file = open(out_fn_prefix + out_fn_intro + out_fn_suffix, "w")
 for line in in_file:
 	# convert unicode quotes to ascii and remove trailing spaces/new lines.
 	line = unidecode(line).rstrip()
