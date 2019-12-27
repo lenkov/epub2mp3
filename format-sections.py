@@ -35,7 +35,7 @@ for line in in_file:
 		
 	# add section prefix/suffix if this line is a section header
 	if line in sections:
-		line = line.replace(" ", ". ", 1)					# replace the first space with space and dot
+		line = line.replace(" ", ". ", 1)					# replace the first space with dot and space
 		line = prefix + line + suffix						# add prefix and suffix for sections.	
 	
 	# open a new file on new chapter
@@ -48,6 +48,12 @@ for line in in_file:
 
 	# remove last dot (if exist) and add long pause
 	line = line.rstrip(".") + long_pause
+
+	# replace colon with long pause
+	line = line.replace(":", long_pause)
+
+	# remove stars (used for bullets)
+	line = line.replace("*", "")
 
 	# convert quotes to \" etc.
 	line = line.replace('"','\\"')
