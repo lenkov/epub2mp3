@@ -11,8 +11,8 @@ out_fn_prefix   = folder + "txt/"
 out_fn_suffix   = ".txt"
 out_fn_intro    = "Preface"
 out_fn_part     = 0
-prefix          = " Section "
-suffix          = "."
+section_prefix  = " Section "
+section_suffix  = "."
 chapter_prefix  = "Chapter "
 long_pause      = "...   "
 max_file_size   = 5000          # limitation of GCP TTS API
@@ -39,7 +39,7 @@ for line in in_file:
     # add section prefix/suffix if this line is a section header
     if line in sections:
         line = line.replace(" ", ". ", 1)                   # replace the first space with dot and space
-        line = prefix + line + suffix                       # add prefix and suffix for sections.   
+        line = section_prefix + line + section_suffix                       # add prefix and suffix for sections.   
     
     # open a new file on new chapter
     if line.startswith(chapter_prefix):
