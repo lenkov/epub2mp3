@@ -6,6 +6,7 @@ from string import Template
 import sys
 
 folder          = sys.argv[1] + "/"
+fn_prefix       = sys.argv[1] + "-"
 txt_folder      = folder + "txt/"
 json_folder     = folder + "json/"
 mp3_folder      = folder + "mp3/"
@@ -31,7 +32,4 @@ for file in matched_files:
     mp3_fn  = file.replace(".txt", ".mp3", 1)
     with open(json_folder + json_fn, "w") as f:
         t = f.write(json_tmpl.substitute(text = t))
-    print exec_tmpl.substitute(src_file = json_folder + json_fn, dest_file = mp3_folder + mp3_fn)  
-
-
-
+    print exec_tmpl.substitute(src_file = json_folder + json_fn, dest_file = mp3_folder + fn_prefix + mp3_fn)
